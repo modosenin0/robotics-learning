@@ -14,14 +14,14 @@ to hardware that actually moves.
 | Track | What | Status |
 |---|---|---|
 | Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Course 1, nearly complete |
-| Hardware | Arduino UNO R4 experiments | Project 01 complete |
+| Hardware | Arduino UNO R4 experiments | Project 02 complete |
 
 ## Projects
 
 | # | Project | Concepts | Status |
 |---|---|---|---|
 | 01 | [LED circuit](01-led-circuit/) | Digital output, current limiting, LED polarity | Complete |
-| 02 | Button-controlled LED | Digital input, pull-up resistors, debouncing | Planned |
+| 02 | [Button-controlled LEDs](02-button-controlled-led/) | Digital input, pull-up resistors, debouncing | Complete |
 | 03 | Potentiometer | Analog input, ADC, mapping ranges | Planned |
 | 04 | Servo control | PWM, angular position, coordinate frames | Planned |
 | 05 | Ultrasonic sensor | Timing, distance measurement, sensor noise | Planned |
