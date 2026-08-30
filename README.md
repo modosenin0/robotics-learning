@@ -14,7 +14,7 @@ to hardware that actually moves.
 | Track | What | Status |
 |---|---|---|
 | Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Course 1, nearly complete |
-| Hardware | Arduino UNO R4 experiments | Project 02 complete |
+| Hardware | Arduino UNO R4 experiments | Project 03 complete |
 
 ## Projects
 
@@ -22,7 +22,7 @@ to hardware that actually moves.
 |---|---|---|---|
 | 01 | [LED circuit](01-led-circuit/) | Digital output, current limiting, LED polarity | Complete |
 | 02 | [Button-controlled LEDs](02-button-controlled-led/) | Digital input, pull-up resistors, debouncing | Complete |
-| 03 | Potentiometer | Analog input, ADC, mapping ranges | Planned |
+| 03 | [TMP36 temperature-triggered LEDs](03-tmp36-temperature-leds/) | Analog input, ADC, sensor transfer functions | Complete |
 | 04 | Servo control | PWM, angular position, coordinate frames | Planned |
 | 05 | Ultrasonic sensor | Timing, distance measurement, sensor noise | Planned |
 | 06 | DC motor + driver | H-bridge, PWM speed control, power | Planned |
