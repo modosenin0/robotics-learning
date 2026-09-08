@@ -14,7 +14,7 @@ to hardware that actually moves.
 | Track | What | Status |
 |---|---|---|
 | Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Course 1, nearly complete |
-| Hardware | Arduino UNO R4 experiments | Project 05 complete |
+| Hardware | Arduino UNO R4 experiments | Project 06 complete |
 
 ## Projects
 
@@ -25,7 +25,7 @@ to hardware that actually moves.
 | 03 | [TMP36 temperature-triggered LEDs](03-tmp36-temperature-leds/) | Analog input, ADC, sensor transfer functions | Complete |
 | 04 | [Color-mixing lamp](04-color-mixing-lamp/) | Multi-channel analog input, PWM output, proportional sensing | Complete |
 | 05 | [Potentiometer-controlled servo](05-servo-potentiometer/) | Analog input, `map()`, PWM servo control | Complete |
-| 06 | DC motor + driver | H-bridge, PWM speed control, power | Planned |
+| 06 | [Light theremin](06-light-theremin/) | Runtime sensor calibration, `tone()`, mapping ranges | Complete |
 | 07 | Encoder | Interrupts, pulse counting, RPM | Planned |
 | 08 | PID motor control | Closed-loop control, tuning, steady-state error | Planned |
 | 09 | Differential drive | Wheel odometry, forward kinematics | Planned |
