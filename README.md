@@ -13,7 +13,7 @@ to hardware that actually moves.
 
 | Track | What | Status |
 |---|---|---|
-| Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Course 1, nearly complete |
+| Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Courses 1–2 complete |
 | Hardware | Arduino UNO R4 experiments | Project 07 complete |
 
 ## Projects
