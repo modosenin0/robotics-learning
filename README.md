@@ -14,7 +14,7 @@ to hardware that actually moves.
 | Track | What | Status |
 |---|---|---|
 | Theory | [Modern Robotics](https://www.coursera.org/specializations/modernrobotics) (Northwestern / Lynch & Park) | Courses 1–2 complete |
-| Hardware | Arduino UNO R4 experiments | Project 09 complete |
+| Hardware | Arduino UNO R4 experiments | Project 10 complete |
 
 ## Projects
 
@@ -29,6 +29,7 @@ to hardware that actually moves.
 | 07 | [Resistor-ladder keyboard](07-keyboard-instrument/) | Resistor ladders, multi-value analog thresholds, `tone()` | Complete |
 | 08 | [Digital hourglass](08-digital-hourglass/) | `millis()` timing, LED matrix, tilt switch as event trigger | Complete |
 | 09 | [Motorized pinwheel](09-motorized-pinwheel/) | Transistor switching, driving a load beyond pin current limits | Complete |
+| 10 | [Crystal ball](10-crystal-ball/) | Character LCD (`LiquidCrystal`), `random()`, edge-triggered events | Complete |
 
 ## How each project is documented
 

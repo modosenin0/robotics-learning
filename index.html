@@ -215,7 +215,7 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--acc
         <span class="tag">Hardware</span>
         <h3>Arduino UNO R4</h3>
         <p>A hands-on lab that starts at a blinking LED and builds toward closed-loop control. Every build — even the trivial ones — gets documented: what was built, what happened, what broke, and how it connects to the theory.</p>
-        <span class="status done"><span class="dot"></span>9 projects complete</span>
+        <span class="status done"><span class="dot"></span>10 projects complete</span>
       </div>
     </div>
   </div>
@@ -302,6 +302,9 @@ const projects=[
  {n:"09",title:"Motorized Pinwheel",folder:"09-motorized-pinwheel",sketch:"motorized_pinwheel",photo:"09-motorized-pinwheel/photos/motor.jpg",
   sum:"A button switches a DC motor via a transistor and its own 9V supply — the first load too large to drive from an Arduino pin directly.",
   tags:["transistor","external power","DC motor"]},
+ {n:"10",title:"Crystal Ball",folder:"10-crystal-ball",sketch:"crystalball",photo:"10-crystal-ball/photos/crystalball.jpg",
+  sum:"A Magic 8-Ball on a 16×2 LCD — tilt the switch to \"ask\" and the board prints one of eight random fortunes. The first human-readable display.",
+  tags:["LiquidCrystal","random()","edge trigger"]},
 ];
 const repo="https://github.com/modosenin0/robotics-learning/blob/main/";
 const grid=document.getElementById("grid");
