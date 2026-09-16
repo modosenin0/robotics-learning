@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>modosenin0 — Robotics Journey</title>
+<meta name="description" content="A software engineer's transition into robotics — theory (Modern Robotics) and hardware (Arduino UNO R4), documented project by project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ea;
+  --surface:#fbf9f4;
+  --surface-2:#efeadf;
+  --ink:#23201b;
+  --ink-soft:#57514738;
+  --muted:#6f675a;
+  --line:#d9d2c4;
+  --accent:#c4562a;
+  --accent-soft:#c4562a1a;
+  --green:#4f7a3a;
+  --shadow:0 1px 2px #23201b0d, 0 8px 24px -12px #23201b26;
+  --radius:14px;
+  --maxw:1080px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#181613;
+    --surface:#211e1a;
+    --surface-2:#2a2621;
+    --ink:#ece7dd;
+    --ink-soft:#ece7dd22;
+    --muted:#a39a89;
+    --line:#3a352e;
+    --accent:#e9793f;
+    --accent-soft:#e9793f1f;
+    --green:#8fb56f;
+    --shadow:0 1px 2px #0006, 0 12px 30px -14px #000a;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:22px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+a{color:inherit}
+code,.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:60px}
+.brand{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:14px;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.brand b{color:var(--accent)}
+.nav nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.nav nav a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:8px}
+.nav nav a:hover{color:var(--ink);background:var(--surface-2)}
+.nav .gh{border:1px solid var(--line);color:var(--ink)}
+
+/* hero */
+.hero{padding:74px 0 40px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);margin:0 0 22px}
+.hero .lede{font-size:clamp(1.05rem,2.2vw,1.28rem);color:var(--muted);max-width:60ch;margin:0 0 18px}
+.hero .thesis{max-width:62ch;font-size:1.02rem;margin:0 0 30px}
+.hero .thesis b{color:var(--ink);font-weight:600}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:10px;
+  font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn svg{width:17px;height:17px}
+
+/* section scaffolding */
+section{padding:52px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin:0 0 30px;flex-wrap:wrap}
+.sec-head .n{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:14px;font-weight:500}
+.sec-head h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin:0}
+.sec-head p{color:var(--muted);margin:0;font-size:15px}
+
+/* tracks */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.track{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.track .tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.track h3{font-size:1.35rem;margin:8px 0 6px}
+.track p{color:var(--muted);margin:0 0 18px;font-size:14.5px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;
+  padding:6px 12px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.status.done{background:color-mix(in srgb,var(--green) 16%,transparent);color:var(--green)}
+.status .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* method */
+.pipeline{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:0 0 26px}
+.pipe{flex:1 1 150px;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:16px 16px;position:relative;font-size:14px}
+.pipe .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);display:block;margin-bottom:4px}
+.agree{display:grid;grid-template-columns:1fr 1fr;gap:12px 30px;list-style:none;padding:0;margin:0}
+.agree li{padding-left:26px;position:relative;font-size:14.5px;color:var(--ink)}
+.agree li::before{content:"→";position:absolute;left:0;color:var(--accent);font-family:'JetBrains Mono',monospace}
+.agree b{font-weight:600}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  transition:transform .14s ease,box-shadow .14s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 14px -6px #23201b33,0 20px 40px -20px #23201b40}
+.shot{aspect-ratio:4/3;overflow:hidden;background:var(--surface-2);cursor:zoom-in;position:relative}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.card:hover .shot img{transform:scale(1.04)}
+.shot .num{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:500;color:#fff;background:#23201bb8;backdrop-filter:blur(3px);
+  padding:4px 9px;border-radius:8px}
+.card .body{padding:16px 17px 18px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:1.12rem;margin:0 0 7px;font-family:Fraunces,serif}
+.card .sum{font-size:13.6px;color:var(--muted);margin:0 0 14px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 15px}
+.tags span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);
+  background:var(--surface-2);border:1px solid var(--line);padding:3px 8px;border-radius:6px}
+.card .links{display:flex;gap:8px;margin-top:auto}
+.card .links a{flex:1;text-align:center;font-size:12.5px;font-weight:500;text-decoration:none;
+  padding:8px;border-radius:8px;border:1px solid var(--line);color:var(--ink)}
+.card .links a:hover{background:var(--surface-2)}
+.card .links a.code{color:var(--muted)}
+
+/* roadmap */
+.road{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.road li{display:flex;align-items:center;gap:16px;padding:15px 18px;background:var(--surface);
+  border:1px solid var(--line);font-size:15px}
+.road li:first-child{border-radius:12px 12px 0 0}
+.road li:last-child{border-radius:0 0 12px 12px}
+.road li+li{border-top:none}
+.road .mark{width:22px;height:22px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-size:12px;border:1.5px solid var(--line);color:var(--muted)}
+.road li.done .mark{background:var(--green);border-color:var(--green);color:#fff}
+.road li.done .lbl{color:var(--ink)}
+.road li.now .mark{border-color:var(--accent);color:var(--accent);border-style:dashed}
+.road .lbl{color:var(--muted);font-weight:500}
+.road .badge{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.road li.done .badge{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green)}
+.road li.now .badge{background:var(--accent-soft);color:var(--accent)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:40px 0 56px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:#14110de8;display:none;place-items:center;z-index:100;padding:24px;cursor:zoom-out}
+.lb.open{display:grid}
+.lb img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 20px 60px #0008}
+
+@media(max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .tracks{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .agree{grid-template-columns:1fr}
+  .hero{padding:52px 0 30px}
+  .nav nav a.hidephone{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">modosenin0<b>/</b>robotics</a>
+    <nav>
+      <a class="hidephone" href="#tracks">Tracks</a>
+      <a class="hidephone" href="#method">Method</a>
+      <a href="#projects">Projects</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="gh" href="https://github.com/modosenin0/robotics-learning" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <p class="eyebrow">Software engineer → robotics</p>
+    <h1>Learning robotics<br>properly.</h1>
+    <p class="lede">A record of the transition from software engineering into robotics — theory first, then something physical that demonstrates it.</p>
+    <p class="thesis"><b>Programming isn't the hard part.</b> What I'm building are the robotics mathematics, control theory, electronics, and the habit of connecting equations to hardware that actually moves.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See the projects</a>
+      <a class="btn" href="https://github.com/modosenin0/robotics-learning" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
+        Source repository
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="tracks">
+  <div class="wrap">
+    <div class="sec-head"><span class="n">01</span><h2>Two tracks, in parallel</h2><p>Theory and hardware, deliberately connected — the lab is where the maths becomes observable.</p></div>
+    <div class="tracks">
+      <div class="track">
+        <span class="tag">Theory</span>
+        <h3>Modern Robotics</h3>
+        <p>Northwestern / Lynch &amp; Park. Coordinate frames, rotation matrices, homogeneous transformations, exponential coordinates and screw axes — held to the standard of explaining what each piece of notation means physically, not just manipulating it.</p>
+        <span class="status done"><span class="dot"></span>Courses 1–2 complete</span>
+      </div>
+      <div class="track">
+        <span class="tag">Hardware</span>
+        <h3>Arduino UNO R4</h3>
+        <p>A hands-on lab that starts at a blinking LED and builds toward closed-loop control. Every build — even the trivial ones — gets documented: what was built, what happened, what broke, and how it connects to the theory.</p>
+        <span class="status done"><span class="dot"></span>9 projects complete</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="sec-head"><span class="n">02</span><h2>The method</h2><p>One loop, repeated at increasing complexity.</p></div>
+    <div class="pipeline">
+      <div class="pipe"><span class="k">01</span>Learn the theory</div>
+      <div class="pipe"><span class="k">02</span>Understand what it means physically</div>
+      <div class="pipe"><span class="k">03</span>Build something that demonstrates it</div>
+      <div class="pipe"><span class="k">04</span>Document what actually happened</div>
+      <div class="pipe"><span class="k">05</span>Increase complexity</div>
+    </div>
+    <ul class="agree">
+      <li><b>Don't rush.</b> Depth over course-completion speed.</li>
+      <li><b>Build while learning.</b> Don't wait until the theory is finished.</li>
+      <li><b>Start simple.</b> An LED is a legitimate Project 01.</li>
+      <li><b>Understand before abstracting.</b> Know what a library does before leaning on it.</li>
+      <li><b>Write down the failures.</b> The debugging is the content.</li>
+      <li><b>Connect it back.</b> Every build ties to a robotics concept.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="n">03</span><h2>Projects</h2><p>Nine Arduino builds, each fully written up. Click a photo to enlarge.</p></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head"><span class="n">04</span><h2>The road ahead</h2><p>Fundamentals first; ROS&nbsp;2 and autonomy deliberately later.</p></div>
+    <ul class="road">
+      <li class="done"><span class="mark">✓</span><span class="lbl">Arduino fundamentals — digital &amp; analog I/O</span><span class="badge">Done</span></li>
+      <li class="now"><span class="mark">•</span><span class="lbl">Sensors &amp; actuators — motors, encoders, drivers</span><span class="badge">In progress</span></li>
+      <li><span class="mark"></span><span class="lbl">Closed-loop control — PID, tuning, steady-state error</span><span class="badge">Planned</span></li>
+      <li><span class="mark"></span><span class="lbl">Differential-drive robot — odometry, forward kinematics</span><span class="badge">Planned</span></li>
+      <li><span class="mark"></span><span class="lbl">ROS 2 &amp; simulation</span><span class="badge">Planned</span></li>
+      <li><span class="mark"></span><span class="lbl">Perception &amp; autonomy</span><span class="badge">Planned</span></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Built and documented by <a href="https://github.com/modosenin0" target="_blank" rel="noopener">@modosenin0</a>.</span>
+    <span class="mono">theory → physical intuition → build → document</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" aria-hidden="true"><img id="lbimg" alt=""></div>
+
+<script>
+const projects=[
+ {n:"01",title:"LED Circuit",folder:"01-led-circuit",sketch:"led_blink",photo:"01-led-circuit/photos/Original.jpeg",
+  sum:"An LED blinking at 1 Hz under software control — the first time a line of code causes something physical to happen.",
+  tags:["digitalWrite","current limiting","LED polarity"]},
+ {n:"02",title:"Button-Controlled LEDs",folder:"02-button-controlled-led",sketch:"button_led",photo:"02-button-controlled-led/photos/Proyecto2.jpg",
+  sum:"A pushbutton switches three LEDs between an idle blink pattern and a held state — reading a digital input and branching on it.",
+  tags:["digitalRead","pull resistors","state"]},
+ {n:"03",title:"TMP36 Temperature LEDs",folder:"03-tmp36-temperature-leds",sketch:"tmp36_temperature_leds",photo:"03-tmp36-temperature-leds/photos/Project%203%20photo.jpg",
+  sum:"A TMP36 analog sensor lights more LEDs as temperature climbs past a baseline in 2 °C bands — sense, convert to °C, threshold, actuate.",
+  tags:["analogRead","ADC","transfer function"]},
+ {n:"04",title:"Color-Mixing Lamp",folder:"04-color-mixing-lamp",sketch:"color_mixing_lamp",photo:"04-color-mixing-lamp/photos/Project4.jpg",
+  sum:"Three phototransistors each drive one channel of an RGB LED, so the lamp mirrors the colour of light falling on the sensors.",
+  tags:["multi-channel","PWM","analogWrite"]},
+ {n:"05",title:"Potentiometer Servo",folder:"05-servo-potentiometer",sketch:"servo_potentiometer",photo:"05-servo-potentiometer/photos/project5.jpg",
+  sum:"A potentiometer's position sets a servo's angle directly — the first mechanical output, and manual teleoperation of a single joint.",
+  tags:["Servo","map()","12-bit ADC"]},
+ {n:"06",title:"Light Theremin",folder:"06-light-theremin",sketch:"light_theremin",photo:"06-light-theremin/photos/light_theremin.jpg",
+  sum:"A photoresistor's light level becomes pitch on a piezo buzzer, after a 5-second startup routine that calibrates to the room's light range.",
+  tags:["self-calibration","tone()","millis()"]},
+ {n:"07",title:"Resistor-Ladder Keyboard",folder:"07-keyboard-instrument",sketch:"keyboard_instrument",photo:"07-keyboard-instrument/photos/keyboard_instrument.jpg",
+  sum:"Four buttons through a resistor ladder play four notes from a single analog pin — trading digital pins for analog thresholds.",
+  tags:["resistor ladder","thresholds","tone()"]},
+ {n:"08",title:"Digital Hourglass",folder:"08-digital-hourglass",sketch:"hourglass",photo:"08-digital-hourglass/photos/project8.jpg",
+  sum:"Six LEDs fill one per second like falling sand; the onboard LED matrix animates when full, and a tilt switch resets the whole thing.",
+  tags:["millis()","LED matrix","tilt switch"]},
+ {n:"09",title:"Motorized Pinwheel",folder:"09-motorized-pinwheel",sketch:"motorized_pinwheel",photo:"09-motorized-pinwheel/photos/motor.jpg",
+  sum:"A button switches a DC motor via a transistor and its own 9V supply — the first load too large to drive from an Arduino pin directly.",
+  tags:["transistor","external power","DC motor"]},
+];
+const repo="https://github.com/modosenin0/robotics-learning/blob/main/";
+const grid=document.getElementById("grid");
+grid.innerHTML=projects.map(p=>`
+ <article class="card">
+   <div class="shot" data-full="${p.photo}"><span class="num">Project ${p.n}</span>
+     <img loading="lazy" src="${p.photo}" alt="${p.title} breadboard build">
+   </div>
+   <div class="body">
+     <h3>${p.title}</h3>
+     <p class="sum">${p.sum}</p>
+     <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+     <div class="links">
+       <a href="${repo}${p.folder}/README.md" target="_blank" rel="noopener">Write-up</a>
+       <a class="code" href="${repo}${p.folder}/code/${p.sketch}/${p.sketch}.ino" target="_blank" rel="noopener">Code</a>
+     </div>
+   </div>
+ </article>`).join("");
+
+const lb=document.getElementById("lb"),lbimg=document.getElementById("lbimg");
+grid.addEventListener("click",e=>{const s=e.target.closest(".shot");if(!s)return;
+  lbimg.src=s.dataset.full;lb.classList.add("open");lb.setAttribute("aria-hidden","false");});
+lb.addEventListener("click",()=>{lb.classList.remove("open");lb.setAttribute("aria-hidden","true");lbimg.src="";});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&lb.classList.contains("open"))lb.click();});
+</script>
+</body>
+</html>
